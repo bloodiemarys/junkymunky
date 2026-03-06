@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
+/* ─── Brand Design Tokens ──────────────────────────────────────────────────── */
 :root {
+  /* Core brand colors */
+  --brand-green:        #2E8B3C;
+  --brand-green-hover:  #256F30;
+  --brand-green-light:  #D4EDDA;
+  --brand-green-bright: #4ADE80;
+  --brand-gold:         #F0B429;
+  --brand-gold-hover:   #D49B1A;
+  --brand-gold-light:   #FEF3C7;
+  --brand-navy:         #1C2B3A;
+  --brand-navy-light:   #243347;
+  --brand-cream:        #F7F9F5;
+
+  /* Semantic */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1C2B3A;
+  --muted:      #F7F9F5;
+  --muted-fg:   #6B7280;
+  --border:     #E5E7EB;
+  --ring:       #2E8B3C;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background:   var(--background);
+  --color-foreground:   var(--foreground);
+  --font-sans:          var(--font-geist-sans);
+  --font-mono:          var(--font-geist-mono);
+
+  /* Brand color palette — available as bg-brand-green, text-brand-gold, etc. */
+  --color-brand-green:        var(--brand-green);
+  --color-brand-green-hover:  var(--brand-green-hover);
+  --color-brand-green-light:  var(--brand-green-light);
+  --color-brand-green-bright: var(--brand-green-bright);
+  --color-brand-gold:         var(--brand-gold);
+  --color-brand-gold-hover:   var(--brand-gold-hover);
+  --color-brand-gold-light:   var(--brand-gold-light);
+  --color-brand-navy:         var(--brand-navy);
+  --color-brand-navy-light:   var(--brand-navy-light);
+  --color-brand-cream:        var(--brand-cream);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ─── Selection ────────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--brand-green-light);
+  color: var(--brand-navy);
+}
+
+/* ─── Focus ────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--brand-green);
+  outline-offset: 2px;
+}
+
+/* ─── Scrollbar (subtle, premium) ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-green);
+}
+
+/* ─── Utility: gradient text ───────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, var(--brand-green) 0%, #3DAD52 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--brand-gold) 0%, #F5CF5E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Utility: hero gradient background ────────────────────────────────────── */
+.hero-bg {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(46,139,60,0.18) 0%, transparent 65%),
+              linear-gradient(180deg, #0F1E2A 0%, #1C2B3A 100%);
+}
+
+/* ─── Utility: glow effects ────────────────────────────────────────────────── */
+.glow-green {
+  box-shadow: 0 0 40px rgba(46, 139, 60, 0.3);
+}
+
+.glow-gold {
+  box-shadow: 0 0 40px rgba(240, 180, 41, 0.25);
+}
+
+/* ─── Utility: card hover lift ─────────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.10);
+}
+
+/* ─── Utility: dot grid pattern ────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(46,139,60,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }

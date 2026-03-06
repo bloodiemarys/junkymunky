@@ -1,32 +1,12 @@
-import { type NextRequest, NextResponse } from "next/server";
+import { type NextRequest } from "next/server";
 
 import { updateSession } from "@/lib/supabase/middleware";
 
-// Routes that require Supabase session management.
-const PROTECTED_PREFIXES = ["/app", "/admin"];
-
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Only run session refresh on protected routes.
-  // Public routes (/, /browse, /sign-in, /sign-up, /how-it-works, /safety, /fairness, etc.)
-  // pass through immediately so no Supabase call is made on them.
-  if (PROTECTED_PREFIXES.some((prefix) => pathname.startsWith(prefix))) {
-    return updateSession(request);
-  }
-
-  return NextResponse.next();
+  return updateSession(request);
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - public assets (svg, png, jpg, jpeg, gif, webp)
-     */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+  // Only run on protected routes — public pages bypass the proxy entirely.
+  matcher: ["/app/:path*", "/admin/:path*"],
 };

@@ -24,8 +24,10 @@ export function env() {
   if (cachedEnv) return cachedEnv;
   const parsed = EnvSchema.safeParse(process.env);
   if (!parsed.success) {
-    console.error(parsed.error.flatten().fieldErrors);
-    throw new Error("Invalid environment variables.");
+    const fieldErrors = parsed.error.flatten().fieldErrors;
+    const missing = Object.keys(fieldErrors).join(", ");
+    console.error("[env] Invalid environment variables:", fieldErrors);
+    throw new Error(`Invalid environment variables: ${missing}`);
   }
   cachedEnv = parsed.data;
   return cachedEnv;

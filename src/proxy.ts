@@ -6,14 +6,7 @@ import { updateSession } from "@/lib/supabase/middleware";
 const PROTECTED_PREFIXES = ["/app", "/admin"];
 
 export async function proxy(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  const { pathname } = url;
-
-  // Redirect www → non-www (canonical domain).
-  if (url.hostname.startsWith("www.")) {
-    url.hostname = url.hostname.slice(4);
-    return NextResponse.redirect(url, { status: 301 });
-  }
+  const { pathname } = request.nextUrl;
 
   // Only run session refresh on protected routes.
   // Public routes (/, /browse, /sign-in, /sign-up, /how-it-works, /safety, /fairness, etc.)

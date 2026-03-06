@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://junkymunky.com"),
+  metadataBase: new URL("https://www.junkymunky.com"),
   title: {
     default: "JunkyMunky — Hauling & Reuse Made Easy",
     template: "%s | JunkyMunky",
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     "Post junk removal jobs, get competitive bids from vetted removers, and pay safely with escrow — only after your junk is gone.",
   keywords: ["junk removal", "junk hauling", "furniture removal", "cleanout", "escrow", "marketplace"],
   alternates: {
-    canonical: "https://junkymunky.com",
+    canonical: "https://www.junkymunky.com",
   },
   openGraph: {
     title: "JunkyMunky — Hauling & Reuse Made Easy",
     description: "Post a job, get bids, pay after pickup. The easiest way to get rid of junk.",
     siteName: "JunkyMunky",
-    url: "https://junkymunky.com",
+    url: "https://www.junkymunky.com",
     type: "website",
   },
 };

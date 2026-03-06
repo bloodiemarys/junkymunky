@@ -5,7 +5,7 @@ import { updateSession } from "@/lib/supabase/middleware";
 // Routes that require Supabase session management.
 const PROTECTED_PREFIXES = ["/app", "/admin"];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { pathname } = url;
 
